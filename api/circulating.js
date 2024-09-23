@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
   if (req.method === "GET") {
     try {
       const totalSupply = await contract.totalSupply();
-      const circulatingSupply = totalSupply.mul(90).div(100); // Calculate circulating supply
+      const circulatingSupply = totalSupply; // Set circulating supply to 100% of total supply
       const circulatingSupplyWithoutDecimals = circulatingSupply.div(
         ethers.BigNumber.from("10").pow(18)
       ); // Remove 18 decimals
