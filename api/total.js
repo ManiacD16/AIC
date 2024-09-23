@@ -10,7 +10,10 @@ module.exports = async (req, res) => {
   if (req.method === "GET") {
     try {
       const totalSupply = await contract.totalSupply();
-      res.send(totalSupply.toString()); // Return only the value as plain text
+      const totalSupplyWithoutDecimals = totalSupply.div(
+        ethers.BigNumber.from("10").pow(18)
+      ); // Remove 18 decimals
+      res.send(totalSupplyWithoutDecimals.toString()); // Return only the value as plain text
     } catch (error) {
       console.error(error);
       res.status(500).send("Failed to fetch total supply"); // Plain text error message

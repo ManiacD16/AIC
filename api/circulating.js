@@ -11,7 +11,10 @@ module.exports = async (req, res) => {
     try {
       const totalSupply = await contract.totalSupply();
       const circulatingSupply = totalSupply.mul(90).div(100); // Calculate circulating supply
-      res.send(circulatingSupply.toString()); // Return only the value as plain text
+      const circulatingSupplyWithoutDecimals = circulatingSupply.div(
+        ethers.BigNumber.from("10").pow(18)
+      ); // Remove 18 decimals
+      res.send(circulatingSupplyWithoutDecimals.toString()); // Return only the value as plain text
     } catch (error) {
       console.error(error);
       res.status(500).send("Failed to fetch circulating supply"); // Plain text error message
