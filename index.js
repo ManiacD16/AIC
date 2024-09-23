@@ -11,7 +11,5 @@ app.get("/api/total-supply", totalSupplyHandler);
 // Route for circulating supply
 app.get("/api/circulating-supply", circulatingSupplyHandler);
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Export the app for Vercel to use
+module.exports = app;
